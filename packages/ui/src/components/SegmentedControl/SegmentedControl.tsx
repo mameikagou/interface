@@ -255,6 +255,9 @@ export function SegmentedControl<T extends string = string>({
             // To avoid perf issues, we expect the callsite to pass an instance of a component,
             // not a functional component. As a result we can't render it with typical JSX and need
             // to clone it here.
+
+            // cloneElement lets you create a new React element using another element as a starting point.
+            // const clonedElement = cloneElement(element, props, ...children)
             return cloneElement(wrapper, {
               children: optionButton,
             })

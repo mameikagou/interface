@@ -94,6 +94,7 @@ export function SwapFormContextProvider({
   const [swapForm, setSwapForm] = useState<SwapFormState>(prefilledState ?? defaultState)
   const datadogEnabled = useFeatureFlag(FeatureFlags.Datadog)
 
+  // 处理预填充状态的变化
   // prefilled state may load in -- i.e. `outputCurrency` URL param pulling from gql
   const previousInitialInputCurrency = usePrevious(prefilledState?.input)
   const previousInitialOutputCurrency = usePrevious(prefilledState?.output)
@@ -109,6 +110,7 @@ export function SwapFormContextProvider({
     }
   }, [prefilledState, previousInitialInputCurrency, previousInitialOutputCurrency, defaultState])
 
+  // 处理选择货币字段的变化
   // Enable launching the output token selector through a change to the prefilled state
   useEffect(() => {
     // Only rerender the swap form value when true, not when false/undefined
@@ -122,6 +124,7 @@ export function SwapFormContextProvider({
     }
   }, [prefilledState?.selectingCurrencyField])
 
+  // 更新交换表单状态的函数
   const updateSwapForm = useCallback(
     (newState: Parameters<SwapFormContextState['updateSwapForm']>[0]): void => {
       if ('exactAmountFiat' in newState || 'exactAmountToken' in newState) {
